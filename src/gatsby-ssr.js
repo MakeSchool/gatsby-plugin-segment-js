@@ -38,9 +38,10 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 
       window.segmentSnippetLoader = function (customDelay, callback) {
         if (!window.segmentSnippetLoaded && !window.segmentSnippetLoading) {
-          window.segmentSnippetLoading = true;
+          if (!customDelay) { window.segmentSnippetLoading = true; }
 
           function loader() {
+            if (window.segmentSnippetLoaded) { return; }
             window.analytics.load('${writeKey}');
             window.segmentSnippetLoading = false;
             window.segmentSnippetLoaded = true;
