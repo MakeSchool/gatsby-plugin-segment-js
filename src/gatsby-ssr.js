@@ -36,7 +36,7 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
       window.segmentSnippetLoaded = false;
       window.segmentSnippetLoading = false;
 
-      window.segmentSnippetLoader = function (callback) {
+      window.segmentSnippetLoader = function (customDelay, callback) {
         if (!window.segmentSnippetLoaded && !window.segmentSnippetLoading) {
           window.segmentSnippetLoading = true;
 
@@ -53,11 +53,14 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
                 ? requestIdleCallback(function () {loader()})
                 : loader();
             },
-            ${delayLoadTime} || 1000
+            customDelay ? ${delayLoadTime} || 1000 : 1000
           );
         }
       }
-      window.addEventListener('load',function () {window.segmentSnippetLoader()}, { once: true });
+      window.addEventListener('load',function () {window.segmentSnippetLoader(true)}, { once: true });
+      window.addEventListener('scroll',function () {window.segmentSnippetLoader(false)}, { once: true });
+      window.addEventListener('mousedown',function () {window.segmentSnippetLoader(false)}, { once: true });
+      window.addEventListener('touchstart',function () {window.segmentSnippetLoader(false)}, { once: true });
     `;
 
   // if `delayLoad` option is true, use the delayed loader
