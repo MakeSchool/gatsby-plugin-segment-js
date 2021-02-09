@@ -1,7 +1,7 @@
 {
   "name": "gatsby-plugin-segment-js",
   "description": "Easily add Segment JS snippet to your website",
-  "version": "3.7.4",
+  "version": "3.8.0",
   "main": "gatsby-ssr.js",
   "repository": "git@github.com:MakeSchool/gatsby-plugin-segment.git",
   "author": "Dion Larson <6520022+dionlarson@users.noreply.github.com>",
